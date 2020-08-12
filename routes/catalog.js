@@ -2,37 +2,37 @@ var express = require('express');
 var router = express.Router();
 
 // Require controller modules.
-var inventory_controller = require('../controllers/productController');
+var product_controller = require('../controllers/productController');
 var catalog_controller = require('../controllers/categoryController');
 
 /// BOOK ROUTES ///
 
 // GET catalog home page.
-router.get('/', inventory_controller.index);
+router.get('/', product_controller.index);
 
 // GET request for creating a Book. NOTE This must come before routes that display Book (uses id).
-router.get('/book/create', inventory_controller.book_create_get);
+router.get('/book/create', product_controller.book_create_get);
 
 // POST request for creating Book.
-router.post('/book/create', inventory_controller.book_create_post);
+router.post('/book/create', product_controller.book_create_post);
 
 // GET request to delete Book.
-router.get('/book/:id/delete', inventory_controller.book_delete_get);
+router.get('/book/:id/delete', product_controller.book_delete_get);
 
 // POST request to delete Book.
-router.post('/book/:id/delete', inventory_controller.book_delete_post);
+router.post('/book/:id/delete', product_controller.book_delete_post);
 
 // GET request to update Book.
-router.get('/book/:id/update', inventory_controller.book_update_get);
+router.get('/book/:id/update', product_controller.book_update_get);
 
 // POST request to update Book.
-router.post('/book/:id/update', inventory_controller.book_update_post);
+router.post('/book/:id/update', product_controller.book_update_post);
 
 // GET request for one Book.
-router.get('/book/:id', inventory_controller.book_detail);
+router.get('/book/:id', product_controller.book_detail);
 
 // GET request for list of all Book items.
-router.get('/books', inventory_controller.book_list);
+router.get('/boardgames', product_controller.product_list);
 
 /// GENRE ROUTES ///
 

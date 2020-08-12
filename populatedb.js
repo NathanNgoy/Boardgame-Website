@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 
-console.log('This script populates some test board games and categories to your database. Specified database as argument - e.g.: populatedb mongodb+srv://cooluser:coolpassword@cluster0-mbdj7.mongodb.net/local_library?retryWrites=true');
+console.log('This script populates some test board games and categories to your database.');
 
 // Get arguments passed on command line
 var userArgs = process.argv.slice(2);

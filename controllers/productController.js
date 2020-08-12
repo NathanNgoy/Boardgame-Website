@@ -12,13 +12,19 @@ exports.index = function(req, res) {
             Category.countDocuments({}, callback);
         }
     }, function (err, results) {
-        res.render('index', {error: err, data: results})
+        res.render('index', {error: err, data: results});
     });
 };
 
 // Display list of all books.
-exports.book_list = function(req, res) {
-    res.send('NOT IMPLEMENTED: Book list');
+exports.product_list = function(req, res, next) {
+    Product.find({}, "name description")
+      .exec(function (err, list_products) {
+        if (err) { return next(err); }
+        //Successful, so render
+        console.log(list_products);
+        res.render('product_list', { title: 'Board Games List', product_list: list_products, });
+      });
 };
 
 // Display detail page for a specific book.
