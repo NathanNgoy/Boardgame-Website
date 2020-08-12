@@ -5,22 +5,22 @@ var router = express.Router();
 var product_controller = require('../controllers/productController');
 var catalog_controller = require('../controllers/categoryController');
 
-/// BOOK ROUTES ///
+//catalog/....
 
 // GET catalog home page.
 router.get('/', product_controller.index);
 
 // GET request for creating a Book. NOTE This must come before routes that display Book (uses id).
-router.get('/book/create', product_controller.book_create_get);
+router.get('/boardgames/create', product_controller.product_create_get);
 
 // POST request for creating Book.
-router.post('/book/create', product_controller.book_create_post);
+router.post('/boardgames/create', product_controller.product_create_post);
 
 // GET request to delete Book.
-router.get('/book/:id/delete', product_controller.book_delete_get);
+router.get('/boardgames/:id/delete', product_controller.product_delete_get);
 
 // POST request to delete Book.
-router.post('/book/:id/delete', product_controller.book_delete_post);
+router.post('/boardgames/:id/delete', product_controller.product_delete_post);
 
 // GET request to update Book.
 router.get('/book/:id/update', product_controller.book_update_get);
@@ -29,7 +29,7 @@ router.get('/book/:id/update', product_controller.book_update_get);
 router.post('/book/:id/update', product_controller.book_update_post);
 
 // GET request for one Book.
-router.get('/book/:id', product_controller.book_detail);
+router.get('/boardgames/:id', product_controller.product_detail);
 
 // GET request for list of all Book items.
 router.get('/boardgames', product_controller.product_list);

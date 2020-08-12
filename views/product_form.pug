@@ -1,0 +1,38 @@
+extends layout
+
+block content
+    h1= title
+  
+    form(method='POST' action='')
+        div 
+            label(for='name') Name:
+            br
+            input(type='text', placeholder='Name of Boardgame' name='name' required='true' value=(undefined===boardgames ? '' : name) )
+            br
+        div 
+            label(for='description') Description:
+            br
+            textarea(type='textarea', placeholder='Description' name='description' rows='3' required='true') #{undefined===boardgames ? '' : description}
+        div 
+            label(for='price') Price:
+            br
+            input(type='number', placeholder='100' name='price' value=(undefined===boardgames ? '' : price) required='true') 
+            br
+        div 
+            label(for='stock') Number in stock:
+            br
+            input(type='number', placeholder='10' name='stock' value=(undefined===boardgames ? '' : stock) required='true') 
+        div 
+            label Category:
+            div
+                for category in categories
+                    div(style='display: inline; padding-right:10px;')
+                        input(type='checkbox', name='category', id=category._id, value=category._id, checked=category.checked )
+                        label(for=category._id) #{category.name}
+        br
+        button(type='submit') Submit
+
+    if errors
+        ul
+            for error in errors
+                li!= error.msg

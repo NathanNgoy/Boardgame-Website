@@ -16,7 +16,7 @@ var ProductSchema = new Schema(
 ProductSchema
 .virtual('url')
 .get(function () {
-  return '/catalog/product/' + this._id;
+  return '/catalog/boardgames/' + this._id;
 });
 
 //Export model
