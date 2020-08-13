@@ -23,10 +23,10 @@ router.get('/boardgames/:id/delete', product_controller.product_delete_get);
 router.post('/boardgames/:id/delete', product_controller.product_delete_post);
 
 // GET request to update Book.
-router.get('/book/:id/update', product_controller.book_update_get);
+router.get('/boardgames/:id/update', product_controller.product_update_get);
 
 // POST request to update Book.
-router.post('/book/:id/update', product_controller.book_update_post);
+router.post('/boardgames/:id/update', product_controller.product_update_post);
 
 // GET request for one Book.
 router.get('/boardgames/:id', product_controller.product_detail);
@@ -37,27 +37,27 @@ router.get('/boardgames', product_controller.product_list);
 /// GENRE ROUTES ///
 
 // GET request for creating a Genre. NOTE This must come before route that displays Genre (uses id).
-router.get('/genre/create', catalog_controller.genre_create_get);
+router.get('/category/create', catalog_controller.category_create_get);
 
 //POST request for creating Genre.
-router.post('/genre/create', catalog_controller.genre_create_post);
+router.post('/category/create', catalog_controller.category_create_post);
 
 // GET request to delete Genre.
-router.get('/genre/:id/delete', catalog_controller.genre_delete_get);
+router.get('/category/:id/delete', catalog_controller.category_delete_get);
 
 // POST request to delete Genre.
-router.post('/genre/:id/delete', catalog_controller.genre_delete_post);
+router.post('/category/:id/delete', catalog_controller.category_delete_post);
 
 // GET request to update Genre.
-router.get('/genre/:id/update', catalog_controller.genre_update_get);
+router.get('/category/:id/update', catalog_controller.category_update_get);
 
 // POST request to update Genre.
-router.post('/genre/:id/update', catalog_controller.genre_update_post);
+router.post('/category/:id/update', catalog_controller.category_update_post);
 
 // GET request for one Genre.
-router.get('/genre/:id', catalog_controller.genre_detail);
+router.get('/category/:id', catalog_controller.category_detail);
 
 // GET request for list of all Genre.
-router.get('/genres', catalog_controller.genre_list);
+router.get('/category', catalog_controller.category_list);
 
 module.exports = router;

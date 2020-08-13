@@ -81,7 +81,7 @@ exports.product_create_post = [
         }
         next();
     },
-
+ 
     // Validate fields.
     expressValidator.body('name', 'Name must not be empty.').trim().isLength({ min: 1 }),
     expressValidator.body('description', 'Description must not be empty.').trim().isLength({ min: 1 }),
@@ -180,11 +180,108 @@ exports.product_delete_post = function(req, res) {
 };
 
 // Display book update form on GET.
-exports.book_update_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Book update GET');
+exports.product_update_get = function(req, res) {
+    async.parallel({
+        boardgame: function(callback) {
+            Product.findById(req.params.id).exec(callback);
+        },
+        category: function(callback) {
+            Category.find(callback);
+        }
+    }, function(err, results) {
+        if (err) { return next(err); }
+        if (results.boardgame==null) {
+            var err = new Error('Boardgame not found');
+            err.status = 404;
+            return next(err);
+        }
+
+        //Success.
+        for (let all_cat_iter = 0; all_cat_iter < results.category.length; all_cat_iter++) { 
+            for (let board_cat_iter = 0; board_cat_iter < results.boardgame.category.length; board_cat_iter++) {
+                if (results.category[all_cat_iter]._id.toString() === results.boardgame.category._id.toString()) {
+                    results.category[all_cat_iter].checked = 'true';
+                }
+            }
+        }
+        res.render('product_form', { 
+            title: 'Updating Boardgame: ' + results.boardgame.name, 
+            categories: results.category,
+            boardgame: results.boardgame
+        });
+    })
 };
 
 // Handle book update on POST.
-exports.book_update_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Book update POST');
-};
+exports.product_update_post = [
+    // Convert the category to an array.
+    (req, res, next) => {
+        if(!(req.body.category instanceof Array)){
+            if(typeof req.body.category==='undefined')
+            req.body.genre=[];
+            else
+            req.body.category=new Array(req.body.category);
+        }
+        next();
+    },
+
+    // Validate fields.
+    expressValidator.body('name', 'Name must not be empty.').trim().isLength({ min: 1 }),
+    expressValidator.body('description', 'Description must not be empty.').trim().isLength({ min: 1 }),
+    expressValidator.body('price', 'Price should be a whole number and cannot be negative').trim().isInt({ min: 0 }),
+    expressValidator.body('stock', 'Stock should be a whole number and cannot be negative').trim().isInt({ min: 0 }),
+  
+    // Sanitize fields (using wildcard).
+    expressValidator.sanitizeBody('*').escape(),
+
+    // Process request after validation and sanitization.
+    (req, res, next) => {
+        
+        // Extract the validation errors from a request.
+        const errors = expressValidator.validationResult(req);
+
+        // Create a Book object with escaped and trimmed data.
+        var boardgame = new Product(
+          { name: req.body.name,
+            description: req.body.description,
+            price: req.body.price,
+            stock: req.body.stock,
+            category: 
+                typeof req.body.category === "undefined" ? [] : req.body.category,
+            _id: req.params.id
+           });
+
+        if (!errors.isEmpty()) {
+            // There are errors. Render form again with sanitized values/error messages.
+
+            // Get all authors and genres for form.
+            async.parallel({
+                categories: function(callback) {
+                    Category.find(callback);
+                },
+            }, function(err, results) {
+                if (err) { return next(err); }
+
+                // Mark our selected genres as checked.
+                for (let i = 0; i < results.categories.length; i++) {
+                    if (boardgame.category.indexOf(results.categories[i]._id) > -1) {
+                        results.categories[i].checked='true';
+                    }
+                }
+                res.render('product_form', { 
+                    title: 'Create Book',
+                    categories: results.categories, 
+                    boardgame: boardgame, 
+                    errors: errors.array() });
+            });
+            return;
+        }
+        else {
+            // Data from form is valid. Update.
+            Product.findByIdAndUpdate(req.params.id, boardgame, {}, function(err, update_board) {
+                if (err) { return next(err); } 
+                res.redirect(update_board.url);
+            })
+        }
+    }
+];
