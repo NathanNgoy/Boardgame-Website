@@ -30,7 +30,7 @@ function productCreate(name, description, category, price, stock, cb) {
     description: description, 
     category: category, 
     price: price, 
-    stock: stock };
+    stock: stock};
   
   var product = new Product(productDetail);
        
@@ -62,16 +62,24 @@ function categoryCreate(name, cb) {
 function createCategories(cb) {
     async.series([
         function(callback) {
-          categoryCreate("Strategy", callback);
+          categoryCreate("Strategy", 
+          //"Players' decision-making skills have a high significance in determining the outcome", 
+          callback);
         },
         function(callback) {
-          categoryCreate("Card Game", callback);
+          categoryCreate("Card Game", 
+          //"Playing cards as the primary device with which the game is played", 
+          callback);
         },
         function(callback) {
-          categoryCreate("Mystery", callback);
+          categoryCreate("Mystery", 
+          //"Mystery is the central element of the game. Involving a crime or puzzle that needs to be solved.", 
+          callback);
         },
         function(callback) {
-          categoryCreate("Party Games", callback);
+          categoryCreate("Party Games", 
+          //"Fun games meant to be played at social gatherings to facilitate interaction and provide entertainment and recreation", 
+          callback);
         }
         ],
         // optional callback
@@ -82,25 +90,60 @@ function createCategories(cb) {
 function createProducts(cb) {
     async.parallel([
         function(callback) {
-          productCreate("Pandemic", "Four diseases have broken out in the world and it is up to a team of specialists in various fields to find cures for these diseases before mankind is wiped out. Players must work together, playing to their characters' strengths and planning their strategy of eradication before the diseases overwhelm the world with ever-increasing outbreaks.", categories[0], 40, 32, callback);
+          productCreate("Pandemic", 
+          "Four diseases have broken out in the world and it is up to a team of specialists in various fields to find cures for these diseases before mankind is wiped out. Players must work together, playing to their characters' strengths and planning their strategy of eradication before the diseases overwhelm the world with ever-increasing outbreaks.", 
+          categories[0], 
+          40, 
+          32, 
+          callback);
         },
         function(callback) {
-          productCreate("Sushi Go", "Pass The Sushi! In this fast-playing card game, the goal is to grab the best combination of sushi dishes as they whiz by. Score points for making the most maki rolls or for collecting a full set of sashimi.", categories[1], 15, 23, callback);
+          productCreate("Sushi Go", 
+          "Pass The Sushi! In this fast-playing card game, the goal is to grab the best combination of sushi dishes as they whiz by. Score points for making the most maki rolls or for collecting a full set of sashimi.", 
+          categories[1], 
+          15, 
+          23, 
+          callback);
         },
         function(callback) {
-          productCreate("Codenames", "Codenames is a 2015 card game for 4–8 players designed by Vlaada Chvátil and published by Czech Games Edition. Two teams compete by each having a spymaster give one-word clues that can point to multiple words on the board.", categories[0], 16, 4, callback);
+          productCreate("Codenames", 
+          "Codenames is a 2015 card game for 4–8 players designed by Vlaada Chvátil and published by Czech Games Edition. Two teams compete by each having a spymaster give one-word clues that can point to multiple words on the board.", 
+          categories[0], 
+          16, 
+          4, 
+          callback);
         },
         function(callback) {
-          productCreate("Betrayal at House on The Hill", "The house on the hill has a wicked reputation. Those who dare to darken its door often leave steeped in madness and despair — if they leave at all.Now the horror reaches new heights with Widow's Walk, the first-ever expansion for the critically acclaimed board game Betrayal at House on the Hill. The house is expanded with the addition of twenty new rooms, including the roof, a previously unexplored floor.", categories[2], 50, 9, callback);
+          productCreate("Betrayal at House on The Hill", 
+          "The house on the hill has a wicked reputation. Those who dare to darken its door often leave steeped in madness and despair — if they leave at all.Now the horror reaches new heights with Widow's Walk, the first-ever expansion for the critically acclaimed board game Betrayal at House on the Hill. The house is expanded with the addition of twenty new rooms, including the roof, a previously unexplored floor.", 
+          categories[2], 
+          50, 
+          9, 
+          callback);
         },
         function(callback) {
-          productCreate("Mysterium", "A horrible crime has been committed on the grounds of Warwick Manor and it's up to the psychic investigators to get to the bottom of it. In Mysterium, one player takes on the role of the ghost and, over the course of a week, tries to lead the investigators to their culprit. Each night the team will be met with visions, but what is the ghost trying to tell you? Can the psychics determine the weapon, location, and killer - or will a violent criminal pull off the perfect murder?", categories[2], 45, 13, callback);
+          productCreate("Mysterium", 
+          "A horrible crime has been committed on the grounds of Warwick Manor and it's up to the psychic investigators to get to the bottom of it. In Mysterium, one player takes on the role of the ghost and, over the course of a week, tries to lead the investigators to their culprit. Each night the team will be met with visions, but what is the ghost trying to tell you? Can the psychics determine the weapon, location, and killer - or will a violent criminal pull off the perfect murder?", 
+          categories[2],
+          45, 
+          13, 
+          callback);
         },
         function(callback) {
-          productCreate("Scythe", "Scythe is an engine-building game set in an alternate-history 1920s period. It is a time of farming and war, broken hearts and rusted gears, innovation and valor. In Scythe, each player represents a character from one of five factions of Eastern Europe who are attempting to earn their fortune and claim their faction's stake in the land around the mysterious Factory. Players conquer territory, enlist new recruits, reap resources, gain villagers, build structures, and activate monstrous mechs.", categories[0], 90, 7, callback);
+          productCreate("Scythe", 
+          "Scythe is an engine-building game set in an alternate-history 1920s period. It is a time of farming and war, broken hearts and rusted gears, innovation and valor. In Scythe, each player represents a character from one of five factions of Eastern Europe who are attempting to earn their fortune and claim their faction's stake in the land around the mysterious Factory. Players conquer territory, enlist new recruits, reap resources, gain villagers, build structures, and activate monstrous mechs.", 
+          categories[0], 
+          90, 
+          7, 
+          callback);
         },
         function(callback) {
-          productCreate("Secret Hitler", "Secret Hitler is a social deduction game for 5-10 people about finding and stopping the Secret Hitler. Players are secretly divided into two teams: the liberals, who have a majority, and the fascists, who are hidden to everyone but each other. If the liberals can learn to trust each other, they have enough votes to control the elections and save the day. But the fascists will say whatever it takes to get elected, advance their agenda, and win the game.", categories[3], 30, 5, callback);
+          productCreate("Secret Hitler", 
+          "Secret Hitler is a social deduction game for 5-10 people about finding and stopping the Secret Hitler. Players are secretly divided into two teams: the liberals, who have a majority, and the fascists, who are hidden to everyone but each other. If the liberals can learn to trust each other, they have enough votes to control the elections and save the day. But the fascists will say whatever it takes to get elected, advance their agenda, and win the game.", 
+          categories[3], 
+          30, 
+          5, 
+          callback);
         }
         ],
         // optional callback
