@@ -17,7 +17,7 @@ exports.index = function(req, res) {
     });
 };
 
-// Display list of all books.
+// Display list of all boardgames.
 exports.product_list = function(req, res, next) {
     Product.find({}, "name description")
       .exec(function (err, list_products) {
@@ -28,7 +28,7 @@ exports.product_list = function(req, res, next) {
       });
 };
 
-// Display detail page for a specific book.
+// Display detail page for a specific boardgame.
 exports.product_detail = function(req, res, next) {
     async.parallel({
         boardgame: function(callback) {
@@ -55,7 +55,7 @@ exports.product_detail = function(req, res, next) {
     });
 };
 
-// Display book create form on GET.
+// Display boardgame create form on GET.
 exports.product_create_get = function(req, res) {
     // Get all authors and genres, which we can use for adding to our book.
     async.parallel({
@@ -69,7 +69,7 @@ exports.product_create_get = function(req, res) {
     });
 };
 
-// Handle book create on POST.
+// Handle boardgame create on POST.
 exports.product_create_post = [
     // Convert the category to an array.
     (req, res, next) => {
@@ -142,7 +142,7 @@ exports.product_create_post = [
     }
 ];
 
-// Display book delete form on GET.
+// Display boardgame delete form on GET.
 exports.product_delete_get = function(req, res) {
     async.parallel({
         boardgame: function(callback) {
@@ -160,7 +160,7 @@ exports.product_delete_get = function(req, res) {
     });
 };
 
-// Handle book delete on POST.
+// Handle boardgame delete on POST.
 exports.product_delete_post = function(req, res) {
     async.parallel({
         boardgame: function(callback) {
@@ -179,7 +179,7 @@ exports.product_delete_post = function(req, res) {
     });
 };
 
-// Display book update form on GET.
+// Display boardgame update form on GET.
 exports.product_update_get = function(req, res) {
     async.parallel({
         boardgame: function(callback) {
@@ -212,7 +212,7 @@ exports.product_update_get = function(req, res) {
     })
 };
 
-// Handle book update on POST.
+// Handle boardgame update on POST.
 exports.product_update_post = [
     // Convert the category to an array.
     (req, res, next) => {

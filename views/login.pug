@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    user= False
+    if user
+        h1 You're login as #{name}! Not #{name}? Logout(href= '/catalog')
+    else
+        h1 Login not implemented yet
+        br
+        br
+        br

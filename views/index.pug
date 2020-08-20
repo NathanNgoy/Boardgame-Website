@@ -1,13 +1,50 @@
 extends layout
 
 block content
-  <div img(src='../public/images/board_game_header.jpg' alt='some image')>
-    <div class="col-md-6 px-0">
-      <h1 class="display-4 font-italic">Welcome to BoardGameTogether</h1>
-      <p class="lead my-3">Escape to a different world, build your path, defy fate, slay (or befriend) dragons, start your journey here!</p>
-    </div>
-  </div>
 
-  ul
-    li #[strong BoardGames:] !{data.product_count}
-    li #[strong Categories:] !{data.category_count}
+  div.header
+    img.imageheader(src='/images/board_game_header.jpg' alt='some image')
+    div(class="carousel-caption")
+      h2(class="display-3 outline font-weight-bold") Welcome to BoardGame Together
+      p(class="lead my-5 outline font-weight-bold") Escape to a different world, build your path, defy fate, befriend dragons, start your journey here!
+
+  //-- Future iteration: will take into account view and grab boardgames object from list of most viewed
+  div.header
+    div(class="col-md-12 blog-main")
+      h4(class="py-3 pb-2 mb-1 font-italic border-bottom ") Featured
+
+  div(class="album py-5")
+    div(class="row")
+      div(class="col-md-4")
+        div(class="card mb-4 shadow-sm")
+          //-- Future iteration: will be able to get image directly from object
+          img.thumbnail(src="/images/pandemic.jpg" alt="some image")
+          //-- Future iteration: will be able to grab description from object
+          p(class="card-text") Players must work together and play their strategy of eradication before the diseases overwhelm the world.
+          div(class="d-flex justify-content-between align-items-center")
+            div(div class="btn-group")
+              //-- Future iteration: will be able to grab id link from object
+              a(href="/catalog/boardgames/5f3314ea6c53e51c1037f53a" class="btn btn-sm btn-outline-secondary" type="button") View
+              a(href="/catalog/boardgames/5f3314ea6c53e51c1037f53a/update" class="btn btn-sm btn-outline-secondary" type="button") Edit
+            //-- Futre iteration: will be able to grab price from object
+            <small class="text-muted">$30.00</small>
+
+      div(class="col-md-4")
+        div(class="card mb-4 shadow-sm")
+          img.thumbnail(src="/images/haunted.png" alt="some image")
+          p(class="card-text") Players all begin as allies exploring a haunted house filled with dangers, traps, items, and omens
+          div(class="d-flex justify-content-between align-items-center")
+            div(div class="btn-group")
+              a(href="/catalog/boardgames/5f3314ea6c53e51c1037f53d" class="btn btn-sm btn-outline-secondary" type="button") View
+              a(href="/catalog/boardgames/5f3314ea6c53e51c1037f53d/update" class="btn btn-sm btn-outline-secondary" type="button") Edit
+            <small class="text-muted">$55.00</small>
+            
+      div(class="col-md-4")
+        div(class="card mb-4 shadow-sm")
+          img.thumbnail(src="/images/catan.jpg" alt="some image")
+          p(class="card-text") Players take on the roles of settlers, each attempting to build and develop holdings while trading and acquiring resources
+          div(class="d-flex justify-content-between align-items-center")
+            div(div class="btn-group")
+              <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+            <small class="text-muted">55.00</small>
